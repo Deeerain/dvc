@@ -1,12 +1,13 @@
 use gtk::prelude::*;
 use gtk::{Application, ApplicationWindow, Box};
+use gtk_layer_shell::LayerShell;
 
 use crate::audio_panel::AudioPanel;
 
 pub struct MainWindow {
     container: Box,
-    window: ApplicationWindow,
-    audio_panel: AudioPanel,
+    pub window: ApplicationWindow,
+    pub audio_panel: AudioPanel,
 }
 
 impl MainWindow {
@@ -28,6 +29,18 @@ impl MainWindow {
 
     fn init(&self, app: &Application) {
         self.window.set_application(Some(app));
+        self.window.set_width_request(250);
+        self.window.set_height_request(75);
+        self.window.init_layer_shell();
+        self.window.set_layer(gtk_layer_shell::Layer::Top);
+        self.window.set_anchor(gtk_layer_shell::Edge::Top, true);
+        self.window.set_anchor(gtk_layer_shell::Edge::Right, true);
+
+        self.window
+            .set_layer_shell_margin(gtk_layer_shell::Edge::Top, 5);
+        self.window
+            .set_layer_shell_margin(gtk_layer_shell::Edge::Right, 5);
+
         self.container.add(&self.audio_panel.container);
         self.window.add(&self.container);
     }

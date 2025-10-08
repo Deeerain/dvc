@@ -4,7 +4,7 @@ use gtk::{Box, Button, ComboBoxText, Scale};
 pub struct AudioPanel {
     pub container: Box,
     volume_wrapper: Box,
-    volume_scale: Scale,
+    pub volume_scale: Scale,
     device_cb: ComboBoxText,
     mute_button: Button,
 }
@@ -41,14 +41,14 @@ impl AudioPanel {
         self.container.pack_start(&self.device_cb, false, false, 0);
         self.container
             .pack_start(&self.volume_wrapper, false, false, 0);
+        self.container.set_margin_start(5);
+        self.container.set_margin_end(5);
+        self.container.set_margin_top(5);
+        self.container.set_margin_bottom(5);
     }
 
     #[warn(dead_code)]
     pub fn set_volume(&self, value: f64) {
         self.volume_scale.set_value(value);
-    }
-
-    pub fn get_volume(&self) -> f64 {
-        self.volume_scale.value()
     }
 }
