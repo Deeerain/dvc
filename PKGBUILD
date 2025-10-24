@@ -30,5 +30,4 @@ check() {
 package() {
   cd "$pkgname"
   install -Dm0755 -t "$pkgdir/usr/bin/" "target/release/$pkgname"
-  install -Dm0644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
 }

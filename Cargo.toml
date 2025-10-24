@@ -5,10 +5,8 @@ edition = "2024"
 authors = ["Deerain <1deerain1@gmail.com>"]
 readme = "README.md"
 repository = "https://github.com/Deeerain/dvc"
-
-[[bin]]
-name = "dvc"
-path = "src/main.rs"
+description = "Simple volume control panel"
+license = "MIT"
 
 [dependencies]
 alsa = "0.10.0"
