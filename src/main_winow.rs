@@ -1,12 +1,5 @@
-use std::cell::{Cell, RefCell};
-use std::mem::Discriminant;
-use std::rc::{self, Rc};
-use std::time::Duration;
-
-use gtk::gdk::Display;
 use gtk::gdk::keys::constants::Escape;
-use gtk::glib::ffi::g_source_remove_by_user_data;
-use gtk::glib::{self, Propagation, timeout_add_local};
+use gtk::glib::{Propagation};
 use gtk::prelude::*;
 use gtk::{Application, ApplicationWindow, Box};
 use gtk_layer_shell::LayerShell;
