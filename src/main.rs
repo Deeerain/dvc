@@ -1,6 +1,8 @@
 mod audio_panel;
 mod auio;
+mod config;
 mod main_winow;
+mod modles;
 
 use gtk::{
     Application,
@@ -8,11 +10,11 @@ use gtk::{
     glib::ExitCode,
     traits::RangeExt,
 };
-use std::error::Error;
+use std::{error::Error, path::Path};
 
 use main_winow::*;
 
-use crate::auio::AudioManager;
+use crate::{auio::AudioManager, config::AppConfig};
 
 const APP_ID: &str = "com.github.deeerains.dvc";
 
@@ -21,6 +23,15 @@ fn main() -> Result<ExitCode, Box<dyn Error>> {
         .filter_level(log::LevelFilter::Info)
         .init();
 
+    let config_path = Path::new(env!("HOME"))
+        .join(".config")
+        .join("dvc")
+        .join("config.json");
+
+    log::info!("Load config: {0}", config_path.to_str().unwrap());
+
+    let config = AppConfig::load(&config_path)?;
+
     log::info!("Logger inited");
 
     let app = Application::new(Some(APP_ID), Default::default());
@@ -28,7 +39,7 @@ fn main() -> Result<ExitCode, Box<dyn Error>> {
     log::info!("Application inited");
 
     app.connect_activate(move |app| {
-        let main_window = MainWindow::new(app);
+        let main_window = MainWindowBuilder::build_from_config(&config, app).unwrap();
 
         log::info!("Window inited");
 

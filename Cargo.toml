@@ -2,6 +2,7 @@
 name = "dvc"
 version = "0.1.0"
 edition = "2024"
+authors = ["Deerain <1deerain1@gmail.com>"]
 
 [dependencies]
 alsa = "0.10.0"
@@ -9,3 +10,5 @@ env_logger = "0.11.8"
 gtk = "0.18.2"
 gtk-layer-shell = "0.8.2"
 log = "0.4.28"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.145"
